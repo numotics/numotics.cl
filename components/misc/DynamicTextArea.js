@@ -1,30 +1,41 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-const DynamicTextArea = ({ ...props }) => {
-  const textareaRef = useRef(null);
-  const [textareaValue, setTextareaValue] = useState('');
+const DynamicTextArea = ({setValue: propsSetValue, value: propsValue, chatBoxRef, ...props}) => {
   const [textareaLineHeight, setTextareaLineHeight] = useState(0);
 
   useEffect(() => {
-    const computedStyle = window.getComputedStyle(textareaRef.current);
-    const lineHeight = parseInt(computedStyle.getPropertyValue('line-height'));
-    setTextareaLineHeight(lineHeight || 18); // Set a default line height if it's not available
+    if (chatBoxRef.current) {
+      const computedStyle = window.getComputedStyle(chatBoxRef.current);
+      const lineHeight = parseInt(computedStyle.getPropertyValue('line-height'));
+      setTextareaLineHeight(lineHeight || 18); // Set a default line height if it's not available
+    }
   }, []);
 
-  const handleTextareaChange = (event) => {
-      setTextareaValue(event.target.value);
-      textareaRef.current.style.height = 'auto'; // Reset height to allow it to shrink
-      const newScrollHeight = textareaRef.current.scrollHeight;
+  useEffect(() => {
+    if (chatBoxRef.current) {
+      chatBoxRef.current.style.height = 'auto';
+      const newScrollHeight = chatBoxRef.current.scrollHeight;
       const newRows = Math.ceil(newScrollHeight / textareaLineHeight);
-      textareaRef.current.style.height = `${newRows * textareaLineHeight}px`;
+      chatBoxRef.current.style.height = `${newRows * textareaLineHeight}px`;
+    }
+  }, [propsValue, textareaLineHeight]);
+
+  const handleTextareaChange = (event) => {
+    propsSetValue(event.target.value);
+    if (chatBoxRef.current) {
+      chatBoxRef.current.style.height = 'auto';
+      const newScrollHeight = chatBoxRef.current.scrollHeight;
+      const newRows = Math.ceil(newScrollHeight / textareaLineHeight);
+      chatBoxRef.current.style.height = `${newRows * textareaLineHeight}px`;
+    }
   };
 
   return (
     <textarea
-      ref={textareaRef}
-      className="resizable-textarea"
-      value={textareaValue}
+      ref={chatBoxRef}
+      className="resizable-textarea sm:w-2/3"
       onChange={handleTextareaChange}
+      value={propsValue}
       {...props} // Pass through any additional props
     />
   );
