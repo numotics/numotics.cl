@@ -29,6 +29,8 @@ export default function WSChatBox({ inputValue, setInputValue, sendMessageRef, .
       setMessages(prevMessages => [...prevMessages, { role: "assistant", msg: e.data }]);
     };
 
+    lastMessageRef.current.scrollIntoView({behavior: "smooth"})
+
     return () => {
       ws.current.close();
     };
@@ -44,7 +46,7 @@ export default function WSChatBox({ inputValue, setInputValue, sendMessageRef, .
   }, [messages]);
 
   return (
-    <div {...props} className={`${props.className} 2xl:w-5/12 2xl:mx-40 lg:w-3/4 mx-12 w-5/6 text-2xl overflow-y-scroll scrollbar-hide`}>
+    <div {...props} className={`${props.className} 2xl:w-5/12 2xl:mx-40 lg:w-3/4 mx-12 w-5/6 sm:text-2xl text-1xl overflow-y-scroll scrollbar-hide`}>
       <div className="chatbox">
         {messages && messages.map((message, index) => (
           <div key={index} ref={index == messages.length-1 ? lastMessageRef : null} className={`message font-extrabold w-fit my-3 ${message.role === "assistant" ? "ml-8 mr-auto pr-8 text-left" : "mr-8 ml-auto pl-8 text-right"}`}>

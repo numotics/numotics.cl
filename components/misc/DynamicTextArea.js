@@ -32,11 +32,11 @@ const DynamicTextArea = ({setValue: propsSetValue, value: propsValue, chatBoxRef
 
   return (
     <textarea
+      {...props} 
       ref={chatBoxRef}
-      className="resizable-textarea sm:w-2/3"
+      className={"resizable-textarea w-full text-xl sm:text-2xl " + props.className}
       onChange={handleTextareaChange}
       value={propsValue}
-      {...props} // Pass through any additional props
     />
   );
 };

@@ -13,7 +13,8 @@ const notoSerifSC = Noto_Serif_SC({ subsets: ["latin"], weight: "900" });
 export default function Home() {
   const [messages, setMessages] = useState([
     "Estas a un paso de la casa del futuro.",
-    "[nu]motics es una empresa que ofrece servicios de automatización para personas que estan adelantadas a los tiempos.",
+    "[nu]motics ofrece servicios de automatización para personas que estan adelantadas a los tiempos.",
+    "Nuestros servicios son completamente a la medida; por esta razón, no contamos con una tienda online. Preferimos atenderte por medio de una conversación.",
   ]);
 
   const [scrollState, setScrollState] = useState(0);
@@ -26,12 +27,6 @@ export default function Home() {
   const chatBoxRef = useRef(null);
   const scrollTargetRef = useRef(null);
   const scrollStateRef = useRef(scrollState); 
-
-  useEffect(() => {
-    // Update the ref each time the scrollState changes
-    scrollStateRef.current = scrollState;
-  }, [scrollState]);
-
 
   useEffect(() => {
     const onScroll = () => {
@@ -75,6 +70,7 @@ export default function Home() {
   }, [scrollState, startupDone]);
 
   useEffect(() => {
+    scrollStateRef.current = scrollState;
     if (scrollState > messages.length) {
       setStartupDone(true);
       setMessages([]);
@@ -99,7 +95,7 @@ export default function Home() {
 
   return (
     <main className="scroll-smooth">
-      <NavBar currentPage={"home"} />
+      <NavBar />
 
       {/* Hidden logo (placeholder) */}
       <div className="logo flex justify-center items-center h-screen flex-col">
@@ -113,9 +109,9 @@ export default function Home() {
         { startupDone && scrollState > messages.length && (
           <WSChatBox className="mt-32" inputValue={value} setInputValue={setValue} sendMessageRef={sendMessageRef} />
         )}
-        <div className={`my-auto flex flex-row items-center ${(startupDone) ? "mb-10 " : ""}`}>
+        <div className={`my-auto flex flex-row items-center ${(startupDone) ? "mb-10 mt-12 sm:mt-auto" : ""}`}>
           <span className={`mx-4 text-9xl transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`}>[</span>
-          <span className={`${notoSerifSC.className} text-4xl max-w-3xl w-fit mt-2 text-center transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`} ref={scrollTargetRef}>
+          <span className={`${notoSerifSC.className} text-2xl sm:text-4xl max-w-3xl w-fit mt-2 text-center transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`} ref={scrollTargetRef}>
             {scrollState-1 < messages.length ? (
               <Typewriter
                 onInit={(type) => {
