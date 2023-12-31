@@ -109,9 +109,9 @@ export default function Home() {
         { startupDone && scrollState > messages.length && (
           <WSChatBox className="mt-32" inputValue={value} setInputValue={setValue} sendMessageRef={sendMessageRef} />
         )}
-        <div className={`my-auto flex flex-row items-center ${(startupDone) ? "mb-10 mt-12 sm:mt-auto" : ""}`}>
+        <div className={`my-auto flex flex-row items-center bg-transparent ${(startupDone) ? "mb-10 mt-2 sm:mt-auto" : ""}`}>
           <span className={`mx-4 text-9xl transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`}>[</span>
-          <span className={`${notoSerifSC.className} text-2xl sm:text-4xl max-w-3xl w-fit mt-2 text-center transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`} ref={scrollTargetRef}>
+          <span className={`${notoSerifSC.className} text-xl sm:text-4xl max-w-3xl w-fit mt-2 text-center transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`} ref={scrollTargetRef}>
             {scrollState-1 < messages.length ? (
               <Typewriter
                 onInit={(type) => {

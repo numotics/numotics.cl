@@ -19,18 +19,10 @@ const Contact = () => {
 
 
       <div className="flex flex-col my-auto sm:mx-auto mx-2 mt-12 items-center text-center w-full">
-        <h1 className={"mx-auto text-4xl font-bold mb-4 " + notoSerifSC.className}>
-          Puntos de contacto
-        </h1>
-        <div className="flex flex-col justify-between items-center mt-2 w-full text-xl font-semibold mx-auto">
+        <div className="flex flex-col justify-between items-center mt-1 w-full text-xl font-semibold mx-auto">
           <div className="my-4 w-fit flex flex-row items-center mx-0">
             <span className={`mr-1 text-3xl transition-all duration-300`}>[</span>
-              <a href={`/`} className="text-4xl font-bold mx-auto hover:underline decoration-numotics flex"> <MDIcon icon="mdi-email mr-2" />  Correo</a>
-            <span className={`ml-1 text-3xl transition-all duration-300`}>]</span>
-          </div>
-          <div className="my-4 w-fit flex flex-row items-center mx-0">
-            <span className={`mr-1 text-3xl transition-all duration-300`}>[</span>
-              <a href={`/`} className="text-4xl font-bold mx-auto hover:underline decoration-numotics flex"> <MDIcon icon="mdi-instagram mr-2" />  Instagram</a>
+              <a href={`/`} className="text-4xl font-bold mx-auto hover:underline decoration-numotics flex"> <MDIcon icon="mdi-xml mr-2" />  En Construcción</a>
             <span className={`ml-1 text-3xl transition-all duration-300`}>]</span>
           </div>
         </div>
