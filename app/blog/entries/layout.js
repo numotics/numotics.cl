@@ -5,7 +5,7 @@ import NavBar from "@/components/NavBar";
 export default function MdxLayout({ children }) {
   // Create any shared layout or styles here
   return (
-    <main className="scroll-smooth h-screen">
+    <main className="scroll-smooth min-h-screen h-full">
       <NavBar />
 
       <div className="logo flex justify-center items-center flex-col md:-mt-4 mt-16">
