@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import NavBar from "@/components/NavBar";
+import { useEffect } from "react"
 
 const Blog = ({params}) => {
     let fail = false;
@@ -15,10 +16,6 @@ const Blog = ({params}) => {
       if (entry !== null)
         entries.push(entry)
     }
-
-  //  useEffect(() => {
-  //    return () => {};
-  //  }, []);
 
     return (
       <main className="scroll-smooth h-screen">
