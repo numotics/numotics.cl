@@ -100,7 +100,7 @@ export default function Home() {
       {/* Hidden logo (placeholder) */}
       <div className="logo flex justify-center items-center h-screen flex-col">
         <div className="my-auto transition-all duration-100 opacity-0">
-          <Image src="/logo.svg" alt="logo" width="400" height="400"  />
+          <Image src="/logo.svg" alt="logo" width="400" height="400" priority />
         </div>
       </div>
 
