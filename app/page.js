@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Head from "next/head";
 import { useState, useEffect, useRef } from "react";
 import { Noto_Serif_SC } from "next/font/google";
 import Typewriter from "typewriter-effect";
@@ -26,7 +27,7 @@ export default function Home() {
   const sendMessageRef = useRef(null);
   const chatBoxRef = useRef(null);
   const scrollTargetRef = useRef(null);
-  const scrollStateRef = useRef(scrollState); 
+  const scrollStateRef = useRef(scrollState);
 
   useEffect(() => {
     const onScroll = () => {
@@ -76,8 +77,8 @@ export default function Home() {
       setMessages([]);
     }
 
-    if (isTyping && scrollState-1 < messages.length + 1) {
-      setScreensCount((scrollState-1));
+    if (isTyping && scrollState - 1 < messages.length + 1) {
+      setScreensCount((scrollState - 1));
     } else {
       setScreensCount(scrollState);
     }
@@ -87,7 +88,7 @@ export default function Home() {
   const scrollToNextView = () => {
     let cachedScrollState = scrollStateRef.current;
     const interval = setInterval(() => {
-      scrollTargetRef.current.scrollIntoView({behavior: "smooth"})
+      scrollTargetRef.current.scrollIntoView({ behavior: "smooth" })
       if (scrollStateRef.current !== cachedScrollState) clearInterval(interval)
       cachedScrollState = scrollStateRef.current;
     }, 250)
@@ -95,6 +96,26 @@ export default function Home() {
 
   return (
     <main className="scroll-smooth">
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "[nu]motics",
+              url: "https://numotics.cl",
+              logo: "https://numotics.cl/logo.svg",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "hola@numotics.cl",
+                contactType: "sales inquiries",
+              },
+            }),
+          }}
+        />
+      </Head>
+
       <NavBar />
 
       {/* Hidden logo (placeholder) */}
@@ -106,13 +127,13 @@ export default function Home() {
 
       {/* TEXT 1 */}
       <div className="sticky top-0 flex justify-center items-center h-screen flex-col">
-        { startupDone && scrollState > messages.length && (
+        {startupDone && scrollState > messages.length && (
           <WSChatBox className="mt-32" inputValue={value} setInputValue={setValue} sendMessageRef={sendMessageRef} />
         )}
         <div className={`my-auto flex flex-row items-center bg-transparent ${(startupDone) ? "mb-10 mt-2 sm:mt-auto" : ""}`}>
           <span className={`mx-4 text-9xl transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`}>[</span>
           <span className={`${notoSerifSC.className} text-xl sm:text-4xl max-w-3xl w-fit mt-2 text-center transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`} ref={scrollTargetRef}>
-            {scrollState-1 < messages.length ? (
+            {scrollState - 1 < messages.length ? (
               <Typewriter
                 onInit={(type) => {
                   setIsTyping(true);
@@ -121,17 +142,17 @@ export default function Home() {
                   } else {
                     type.pasteString(messages[scrollState - 1])
                   }
-                    type.callFunction((t) => {
-                        const interval = setInterval(() => {
-                          if (
-                            t.elements.wrapper.textContent ==
-                            messages[scrollState - 1]
-                          ) {
-                            setIsTyping(false);
-                            clearInterval(interval);
-                          }
-                        }, 50);
-                      })
+                  type.callFunction((t) => {
+                    const interval = setInterval(() => {
+                      if (
+                        t.elements.wrapper.textContent ==
+                        messages[scrollState - 1]
+                      ) {
+                        setIsTyping(false);
+                        clearInterval(interval);
+                      }
+                    }, 50);
+                  })
                   type.start();
                 }}
                 key={scrollState}
@@ -143,23 +164,23 @@ export default function Home() {
                 }}
               />
             )
-                :
-            <DynamicTextArea className="z-10 appearance-none bg-transparent outline-none text-2xl resize-none h-fit" autoFocus placeholder="Habla con Nia..." setValue={setValue} chatBoxRef={chatBoxRef}/>
-          }
+              :
+              <DynamicTextArea className="z-10 appearance-none bg-transparent outline-none text-2xl resize-none h-fit" autoFocus placeholder="Habla con Nia..." setValue={setValue} chatBoxRef={chatBoxRef} />
+            }
             {/*<DynamicTextArea className="z-10 appearance-none bg-transparent outline-none text-2xl resize-none h-fit" autoFocus placeholder="Habla con Nia..." />*/}
           </span>
           <span className={`mx-4 text-9xl transition-all duration-300 ${scrollSoonState == 1 ? "opacity-0" : "opacity-100"}`}>]</span>
         </div>
       </div>
 
-      { Array.from({ length: screensCount }).map((_, index) => (
-          <div key={index} className="h-screen" />
-        )) }
+      {Array.from({ length: screensCount }).map((_, index) => (
+        <div key={index} className="h-screen" />
+      ))}
 
-      
-      { !startupDone && (
-          <MDIcon icon="mdi-arrow-down" className={"mb-24 text-8xl fixed inset-x-0 bottom-1 w-screen animate-bounce flex transition-all duration-300 z-50 " + ((!isTyping || scrollState == 0) ? "opacity-100" : "opacity-0")} onClick={() => scrollToNextView()} />
-        )
+
+      {!startupDone && (
+        <MDIcon icon="mdi-arrow-down" className={"mb-24 text-8xl fixed inset-x-0 bottom-1 w-screen animate-bounce flex transition-all duration-300 z-50 " + ((!isTyping || scrollState == 0) ? "opacity-100" : "opacity-0")} onClick={() => scrollToNextView()} />
+      )
       }
 
       <div className={`fixed inset-0 flex justify-center items-center transition-all duration-300 \
