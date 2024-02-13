@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 export default function WSChatBox({ inputValue, setInputValue, sendMessageRef, ...props }) {
-  const [messages, setMessages] = useState([{ role: "assistant", msg: "Hola, soy Nia, la asistente virtual de [nu]motics. Te puedo ayudar a solicitar una cotización, o resolver dudas sobre los servicios de [nu]motics. No tienes porque hablarme como si fuera un robot, puedo conversar igual que un humano!" }]);
+  const [messages, setMessages] = useState([{ role: "assistant", msg: "Hola, soy Nia, la asistente virtual de [nu]motics. Te puedo ayudar a solicitar un presupuesto, o resolver dudas sobre los servicios de [nu]motics. No tienes porque hablarme como si fuera un robot, puedo conversar igual que un humano!" }]);
   const ws = useRef(null);
   const lastMessageRef = useRef(null);
 

@@ -13,7 +13,7 @@ const notoSerifSC = Noto_Serif_SC({ subsets: ["latin"], weight: "900" });
 export default function Home() {
   const [messages, setMessages] = useState([
     "Estas a un paso de la casa del futuro.",
-    "[nu]motics ofrece servicios de automatización para personas que estan adelantadas a los tiempos.",
+    "[nu]motics ofrece servicios de automatización y soluciones de domótica de vanguardia para personas que estan adelantadas a los tiempos.",
     "Nuestros servicios son completamente a la medida; por esta razón, no contamos con una tienda online. Preferimos atenderte por medio de una conversación.",
   ]);
 
